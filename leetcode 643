@@ -1,0 +1,43 @@
+import 'dart:math'; // max 함수를 사용하기 위해 import
+
+// 최대 평균 부분 배열을 계산하는 함수
+double findMaxAverage(List<int> nums, int k) {
+  // 초기 윈도우의 합 계산 (첫 번째 k개의 원소)
+  int windowSum = 0;
+  for (int i = 0; i < k; i++) {
+    windowSum += nums[i];
+  }
+
+  // 최대 합 변수 초기화
+  int maxSum = windowSum;
+
+  // 슬라이딩 윈도우: k부터 nums.length까지 반복
+  for (int i = k; i < nums.length; i++) {
+    // 윈도우 이동: 새로운 원소를 더하고 오래된 원소를 뺌
+    windowSum = windowSum + nums[i] - nums[i - k];
+
+    // 최대 합 업데이트
+    maxSum = max(maxSum, windowSum);
+  }
+
+  // 최대 평균 반환
+  return maxSum / k;
+}
+
+// 메인 함수: 테스트 케이스 실행
+void main() {
+  // 테스트 케이스 1
+  List<int> nums1 = [1, 12, -5, -6, 50, 3];
+  int k1 = 4;
+  print(findMaxAverage(nums1, k1)); // 출력: 12.75
+
+  // 테스트 케이스 2
+  List<int> nums2 = [5, 5, 5, 5];
+  int k2 = 2;
+  print(findMaxAverage(nums2, k2)); // 출력: 5.0
+
+  // 테스트 케이스 3
+  List<int> nums3 = [0, 4, 0, 3, 2];
+  int k3 = 1;
+  print(findMaxAverage(nums3, k3)); // 출력: 4.0
+}
