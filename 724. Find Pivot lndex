@@ -1,0 +1,24 @@
+class Solution {
+  int pivotIndex(List<int> nums) {
+    // 전체 값 계산
+    int totalSum = nums.reduce((a, b) => a + b);
+    int leftSum = 0; // 왼쪽 부분 합 초기화
+
+    // 배열을 순회하며 피벗 인덱스 찾기
+    for(int i = 0; i < nums.length; i++) {
+        // 오른쪽 부분 합 = 전체 합 - 왼쪽 부분 합 - 현재 값
+        int rightSum = totalSum - leftSum - nums[i];
+
+        // 왼쪽 부분 합과 오늘쪽 부문 합이 같으면 현재 인덱스 반환
+        if(leftSum == rightSum) {
+            return i;
+        }
+
+        // 왼쪽 부분 합 갱신
+        leftSum += nums[i];
+    }
+
+    // 피벗 인덱스를 찾지 못하면 -1 반환
+    return -1;
+  }
+}
