@@ -1,0 +1,13 @@
+class Solution {
+  String reverseWords(String s) {
+    // 문자열을 공백 기준으로 나누고, 빈 문자열을 제거
+    List<String> words = s.split(' ').where((word) => word.isNotEmpty). toList();
+
+    // 단어의 순서를 반대로 바꾼 후 다시 공백으로 합침
+    return words.reversed.join(' ');
+  }
+}
+// spilt 메서드로 문자열 나누기: 공백 기준으로 문자열을 나눠 단어리스트 만듬.
+// where 메서드로 빈 단어 제거: 중복 공백으로 인해 생긴 빈 문자열 요소 제거함.
+// reversed 메서드로 순서 반전: 단어 리스트의 순서를 뒤바꿈.
+// join 메서드로 단어 결합: 반전된 단어 리스트를 다시 하나의 문자열로 결합함.
